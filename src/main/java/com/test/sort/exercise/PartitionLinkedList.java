@@ -39,10 +39,10 @@ public class PartitionLinkedList {
 		ListNode rightLast = p2;
 		while (head != null) {
 			if (head.val >= x) {
-				//把当前节点(可能存在下。。下节点)
+				//把当前节点(可能存在下。。下节点)赋给右链表最后一个节点
 				rightLast = rightLast.next = head;
 			} else {
-				//把当前节点(可能存在下。。下节点)
+				//把当前节点(可能存在下。。下节点)赋给左链表最后一个节点
 				leftLast = leftLast.next = head;
 			}
 			head = head.next;
