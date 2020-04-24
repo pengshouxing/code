@@ -64,4 +64,11 @@ class ListNode {
 	ListNode(int x) {
 		val = x;
 	}
+
+	public void toString(ListNode node) {
+		while (node != null) {
+			System.out.println(node.val);
+			node = node.next;
+		}
+	}
 }
