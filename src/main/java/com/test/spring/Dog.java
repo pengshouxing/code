@@ -1,5 +1,7 @@
 package com.test.spring;
 
+import java.util.List;
+
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -8,6 +10,7 @@ public class Dog implements InitializingBean,BeanNameAware,DisposableBean{
 	
 	private String name;
 	private String color;
+	private List<String> list;
 	
 	public Dog() {
 		System.out.println("开始进行实例化");
@@ -49,5 +52,14 @@ public class Dog implements InitializingBean,BeanNameAware,DisposableBean{
 
 		System.out.println("这是一个销毁方法");
 	}
+	public List<String> getList() {
+		return list;
+	}
+	public void setList(List<String> list) {
+		System.out.println("什么时候被执行了");
+		this.list = list;
+	}
+	
+	
 
 }
