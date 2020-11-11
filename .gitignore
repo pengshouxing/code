@@ -1,12 +1,9 @@
 /target/
-
-### Java template
 *.class
-
-
 .project
 .classpath
 .settings
 .metadata
-
 bin/
+*.iml
+*.idea
