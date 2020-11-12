@@ -1,6 +1,8 @@
 package com.test.sort.exercise;
 
 
+import com.test.sort.linkedlist.ListNode;
+
 /**
  * 实现一种算法，删除单向链表中间的某个节点（除了第一个和最后一个节点，不一定是中间节点），
  * 假定你只能访问该节点。

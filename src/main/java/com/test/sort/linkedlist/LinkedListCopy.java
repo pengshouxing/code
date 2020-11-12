@@ -8,19 +8,19 @@ package com.test.sort.linkedlist;
 public class LinkedListCopy {
 
 	public static void main(String[] args) {
-		SingleNode node = new SingleNode(3);
-		node.next = new SingleNode(6);
-		node.next.next = new SingleNode(3);
-		node.next.next.next = new SingleNode(4);
+		ListNode node = new ListNode(3);
+		node.next = new ListNode(6);
+		node.next.next = new ListNode(3);
+		node.next.next.next = new ListNode(4);
 
-		SingleNode singleNode = new LinkedListCopy().copyLinkedList(node);
-		singleNode.toString("",singleNode);
+		ListNode listNode = new LinkedListCopy().copyLinkedList(node);
+		listNode.toString("", listNode);
 
 	}
 
-	public SingleNode copyLinkedList(SingleNode from) {
-		SingleNode firstNode = null;
-		SingleNode lastNode = null;
+	public ListNode copyLinkedList(ListNode from) {
+		ListNode firstNode = null;
+		ListNode lastNode = null;
 		while (from != null) {
 			if (from.val % 2 == 0) {
 				if (firstNode == null) {

@@ -9,22 +9,22 @@ package com.test.sort.linkedlist;
 public class LinkedListReversal {
 
 	public static void main(String[] args) {
-		SingleNode node = new SingleNode(1);
-		node.next = new SingleNode(5);
-		node.next.next = new SingleNode(3);
-		node.next.next.next = new SingleNode(7);
-		node.next.next.next.next = new SingleNode(9);
+		ListNode node = new ListNode(1);
+		node.next = new ListNode(5);
+		node.next.next = new ListNode(3);
+		node.next.next.next = new ListNode(7);
+		node.next.next.next.next = new ListNode(9);
 
-		SingleNode reversal = new LinkedListReversal().reversal(node);
+		ListNode reversal = new LinkedListReversal().reversal(node);
 		reversal.toString("反转后的链表",reversal);
 
 	}
 
-	public SingleNode reversal(SingleNode node) {
-		SingleNode nextNode = null;
+	public ListNode reversal(ListNode node) {
+		ListNode nextNode = null;
 		// 创建一个新链表
-		SingleNode reNode = new SingleNode(0);
-		SingleNode curNode = node;
+		ListNode reNode = new ListNode(0);
+		ListNode curNode = node;
 		while (curNode != null) {
 			// 取到下一个链表
 			nextNode = curNode.next;

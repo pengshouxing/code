@@ -1,16 +1,16 @@
 package com.test.sort.linkedlist;
 
 
-public class SingleNode {
+public class ListNode {
 
     public int val;
-    public SingleNode next;
+    public ListNode next;
 
-    public SingleNode(int x) {
+    public ListNode(int x) {
         val = x;
     }
 
-    public void toString(String prefix,SingleNode node) {
+    public void toString(String prefix, ListNode node) {
         StringBuilder sb  = new StringBuilder(prefix);
         while (node != null) {
             sb.append(node.val + ">");
@@ -30,11 +30,11 @@ public class SingleNode {
      * @param addNode:要在尾部新增的节点
      * @return
      */
-    public SingleNode addNodeInTail(SingleNode node, SingleNode addNode) {
+    public ListNode addNodeInTail(ListNode node, ListNode addNode) {
         if(node == null){
             return addNode;
         }else{
-            SingleNode firstNode = node;
+            ListNode firstNode = node;
             while (node.next != null) {
                 node = node.next;
             }
@@ -53,7 +53,7 @@ public class SingleNode {
      * @param addNode:要在头部新增的节点
      * @return
      */
-    public SingleNode addNodeInHead(SingleNode node ,SingleNode addNode){
+    public ListNode addNodeInHead(ListNode node , ListNode addNode){
         if (node != null) {
             addNode.next = node;
         }
@@ -63,25 +63,25 @@ public class SingleNode {
 
     public static void main(String[] args) {
         //测试在尾部添加节点
-        SingleNode node = new SingleNode(0);
-        node.next = new SingleNode(1);
-        SingleNode addNode = new SingleNode(2);
-        SingleNode newNode = addNode.addNodeInTail(node, addNode);
+        ListNode node = new ListNode(0);
+        node.next = new ListNode(1);
+        ListNode addNode = new ListNode(2);
+        ListNode newNode = addNode.addNodeInTail(node, addNode);
         addNode.toString("尾部添加后新的链表0>1>2:",newNode);
 
-        SingleNode addNode2 = new SingleNode(2);
-        SingleNode newNode2 = addNode.addNodeInTail(null, addNode2);
+        ListNode addNode2 = new ListNode(2);
+        ListNode newNode2 = addNode.addNodeInTail(null, addNode2);
         addNode.toString("尾部添加后新的链表2:",newNode2);
 
         //测试在头部添加节点
-        SingleNode node2 = new SingleNode(1);
-        node2.next = new SingleNode(2);
-        SingleNode addHeadNode = new SingleNode(0);
-        SingleNode newHeadNode2 = addHeadNode.addNodeInHead(node2, addHeadNode);
+        ListNode node2 = new ListNode(1);
+        node2.next = new ListNode(2);
+        ListNode addHeadNode = new ListNode(0);
+        ListNode newHeadNode2 = addHeadNode.addNodeInHead(node2, addHeadNode);
         addHeadNode.toString("头部添加后新的链表0>1>2:",newHeadNode2);
 
-        SingleNode addHeadNode2 = new SingleNode(0);
-        SingleNode newHeadNode3 = addHeadNode.addNodeInHead(null, addHeadNode2);
+        ListNode addHeadNode2 = new ListNode(0);
+        ListNode newHeadNode3 = addHeadNode.addNodeInHead(null, addHeadNode2);
         addHeadNode.toString("头部添加后新的链表0:",newHeadNode3);
     }
 
