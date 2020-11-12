@@ -16,7 +16,7 @@ public class LinkedListReversal {
 		node.next.next.next.next = new SingleNode(9);
 
 		SingleNode reversal = new LinkedListReversal().reversal(node);
-		reversal.toString(reversal);
+		reversal.toString("反转后的链表",reversal);
 
 	}
 

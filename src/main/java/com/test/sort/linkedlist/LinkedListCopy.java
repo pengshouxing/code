@@ -14,7 +14,7 @@ public class LinkedListCopy {
 		node.next.next.next = new SingleNode(4);
 
 		SingleNode singleNode = new LinkedListCopy().copyLinkedList(node);
-		singleNode.toString(singleNode);
+		singleNode.toString("",singleNode);
 
 	}
 
