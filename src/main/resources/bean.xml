@@ -3,9 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="dog" class="com.test.spring.Dog" init-method="start" destroy-method="stop">
-       <property name="name" value="小狗"></property>
-       <property name="color" value="黄色"></property>
+    <bean id="dog" class="com.test.spring.Dog">
+       <constructor-arg name="cat" ref="cat"></constructor-arg>
     </bean> 
-    <bean id="dogBeanPost" class="com.test.spring.DogBeanPostProcessor"></bean> 
+    
+    <bean id="cat" class="com.test.spring.Cat">
+       <constructor-arg name="dog" ref="dog"></constructor-arg>
+    </bean>
 </beans>

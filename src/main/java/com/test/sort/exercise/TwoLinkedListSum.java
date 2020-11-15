@@ -1,5 +1,7 @@
 package com.test.sort.exercise;
 
+import com.test.sort.linkedlist.ListNode;
+
 /**
  * 给定两个用链表表示的整数，每个节点包含一个数位。
        这些数位是反向存放的，也就是个位排在链表首部。
@@ -28,7 +30,7 @@ public class TwoLinkedListSum {
 		l2.next.next = new ListNode(6);
 
 		ListNode node = new TwoLinkedListSum().addTwoNumbers(l1, l2);
-		node.toString(node);
+		node.toString("",node);
 	}
 
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
