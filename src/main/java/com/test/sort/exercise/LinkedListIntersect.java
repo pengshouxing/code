@@ -1,5 +1,7 @@
 package com.test.sort.exercise;
 
+import com.test.sort.linkedlist.ListNode;
+
 public class LinkedListIntersect {
 
 	public static void main(String[] args) {
@@ -13,7 +15,7 @@ public class LinkedListIntersect {
 		node2.next = new ListNode(4);
 		
 		ListNode node3 = new LinkedListIntersect().getIntersectionNode(node,node2);
-		node3.toString(node3);
+		node3.toString("",node3);
 
 	}
 

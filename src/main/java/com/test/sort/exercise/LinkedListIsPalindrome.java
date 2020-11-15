@@ -1,5 +1,7 @@
 package com.test.sort.exercise;
 
+import com.test.sort.linkedlist.ListNode;
+
 public class LinkedListIsPalindrome {
 
 	public static void main(String[] args) {
