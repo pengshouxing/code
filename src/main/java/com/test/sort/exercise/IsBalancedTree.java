@@ -29,53 +29,55 @@ import java.util.HashMap;
  * 4   4
  * 返回false 。
  *
+ * 解决思路:采用了后序遍历的思路来递归，如果有一层子树就加1，如果没有子树就加0。
+ * 后序遍历:先访问左子树再访问右子树最后再访问根节点
  */
 public class IsBalancedTree {
 
+    private boolean flag = true;
+
     public static void main(String[] args) {
-        TreeNode treeNode = new TreeNode(0);
-        treeNode.left = new TreeNode(-3);
-        treeNode.right = new TreeNode(9);
-        treeNode.left.left = new TreeNode(-10);
-        treeNode.left.left.right = new TreeNode(-11);
-        treeNode.right.left = new TreeNode(5);
+        TreeNode treeNode = new TreeNode(3);
+        treeNode.left = new TreeNode(2);
+        treeNode.right = new TreeNode(6);
+        treeNode.right.left = new TreeNode(1);
         treeNode.right.right = new TreeNode(7);
-        new IsBalancedTree().isBalanced(treeNode);
+        IsBalancedTree isBalancedTree = new IsBalancedTree();
+        isBalancedTree.isBalanced(treeNode);
+        System.out.println(isBalancedTree.flag);
     }
 
     public boolean isBalanced(TreeNode root) {
         if(root == null){
             return true;
         }
-        HashMap<String, Integer> map = new HashMap<>();
-        isBalanced(root , 1 , new HashMap<String,Integer>());
-        return map.get("largest") -  map.get("least") > 1 ? false : true ;
+        traversal(root);
+        return flag;
     }
 
-    public void isBalanced(TreeNode root, int level, HashMap<String,Integer> map) {
-
-        if(root == null){
-            return;
+    public int traversal(TreeNode root) {
+        //root == null的时候代表该节点是没有子节点的。
+        //!flag == true 的时候代表已经有地方是不满足平衡,所以可以直进返回该树是一颗不平衡的树。
+        if(root == null || !flag){
+            return 0;
         }
-        if(root.left == null && root.right == null){
-            Integer largest = map.get("largest");
-            Integer least = map.get("least");
-            if(largest == null){
-                map.put("largest",level);
-                map.put("least",level);
-            }else {
-                if (level > largest) {
-                    map.put("largest", level);
-                } else {
-                    if (level < least) {
-                        map.put("least", level);
-                    }
-                }
-            }
+        /**
+         *         3
+         *        / \
+         *       2   6
+         *          / \
+         *         1  7
+         *
+         */
+        //这边采用递归的思想,如果节点下有其他节点就会加节点的高度,如果没有节点就不加
+        int leftDept = traversal(root.left);
+        int rightDept = traversal(root.right);
+        //判断两棵子树的高度差是否大于1，大于说明就是不平衡的
+        if(Math.abs(leftDept - rightDept) > 1){
+            flag = false;
         }
-
-        isBalanced(root.left,level,map);
-        isBalanced(root.right,level,map);
+        //例如 3的节点左子树高度是1,右边高度是2,所以应该取它的最大高度来和它对应的节点来判断高度差
+        return Math.max(leftDept,rightDept) + 1;
     }
 
 
