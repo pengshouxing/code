@@ -1,0 +1,23 @@
+1.@import何时被发现？
+ 答:a).容器中先注册ConfigurationClassPostProcessor。
+    b).执行AbstractApplicationContext.invokeBeanFactoryPostProcessors()。
+    c).因为ConfigurationClassPostProcessor是属于PriorityOrdered的,再调用PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors。
+    d).后面再调用ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry()再调用processConfigBeanDefinitions()。
+    e).ConfigurationClassPostProcessor.processConfigBeanDefinitions()中会生成ConfigurationClassParser对象进而调用ConfigurationClassParser.parse()方法。
+    f).再调用ConfigurationClassParser.processConfigurationClass()
+    g).再调用ConfigurationClassParser.doProcessConfigurationClass()该方法会处理@Component,@ComponentScan,@PropertySources,@Import等注解。
+    注意:@ComponentScan扫描完以后会再次执行e-->f-->g,这样导致其他类的@Import注解等的功能也可以被导入。
+    h).再调用ConfigurationClassParser.processImports()方法会实例化@Import导入的组件。
+    i).再调用ConfigurationClass.addImportBeanDefinitionRegistrar添加导入的组件到importBeanDefinitionRegistrars中。
+
+    简化:把@import要导入的组件添加到importBeanDefinitionRegistrars(是个Map)中。
+
+2.@import工作原理?
+    a).在ConfigurationClassPostProcessor.processConfigBeanDefinitions()方法中会调用ConfigurationClassBeanDefinitionReader.loadBeanDefinitions()方法。
+    b).再调用ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass()方法。
+    c).再调用ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars()方法中会依次取出导入到importBeanDefinitionRegistrars中组件,再分别
+       调用组件中的registerBeanDefinitions方法。(导入的组件需要实现ImportBeanDefinitionRegistrar接口)。
+
+    简化:@import要求导入组件的需要实现ImportBeanDefinitionRegistrar接口实现registerBeanDefinitions()方法，
+        并依次取出导入到importBeanDefinitionRegistrars中组件调用实现的registerBeanDefinitions(),具体操作逻辑
+        在registerBeanDefinitions()中实现。

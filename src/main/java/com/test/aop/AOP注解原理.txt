@@ -1,0 +1,18 @@
+1.注解方式开启AOP(@EnableAspectJAutoProxy注解开启AOP)
+
+   a).为什么@EnableAspectJAutoProxy注解能够开启AOP?
+    答:因为@EnableAspectJAutoProxy注解包含@Import(AspectJAutoProxyRegistrar.class)导入了AspectJAutoProxyRegistrar组件,
+       AspectJAutoProxyRegistrar组件往容器中添加AnnotationAwareAspectJAutoProxyCreator(是个BeanPostProcessor后置处理器)
+
+   b).@EnableAspectJAutoProxy的作用?
+   答: 1.添加的AnnotationAwareAspectJAutoProxyCreator后置处理器在bean初始化的时候会调用AbstractAutoProxyCreator.postProcessAfterInitialization()方法
+       2.会调用AbstractAutoProxyCreator.getAdvicesAndAdvisorsForBean()看是否为这个初始化的bean找到了能使用的通知方法,
+            如果找到了那么就会调用CglibAopProxy.getProxy()为bean生成一个代理类,并会设置回调方法,以后调用目标方法的时候都会调拦截器的回调方法(默认回调第一个)
+            相当于会调aop的拦截器(在第一个)是CglibAopProxy.DynamicAdvisedInterceptor内部类的intercept()方法。
+            (具体调用那个看enhancer.setCallbackFilter(new ProxyCallbackFilter)看ProxyCallbackFilter设置的accept方法,调用第一个返回0)
+            容器中的存在就是他的代理对象
+
+2.AOP原理简版:@EnableAspectJAutoProxy有个@import注解导入了AspectJAutoProxyRegistrar组件,
+             该组件往容器中注册了AnnotationAwareAspectJAutoProxyCreator后置处理器,会判断Bean是否
+             有通知方法,如果有在Bean初始化的时候生成一个代理对象,并生成回调方法,每次调用目标方法的时候就是调用了回调方法。
+
